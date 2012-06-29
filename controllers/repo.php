@@ -17,8 +17,7 @@ class Github_Repo_Controller extends Base_Controller
 	{
 
 		$data = $this->git->get_file($repo, $file);
-
-		return highlight_string(base64_decode($data->content));
+		return str_replace(array('<?php', '?>'), array('&lt;?php', '?&gt;'), base64_decode($data->content));
 	}
 	
 	/*
