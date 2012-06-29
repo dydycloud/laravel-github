@@ -18,5 +18,5 @@ http://example.com/github/get/myproject/index_php
 
 Or when a file is in a subfolder:
 
-http://example.com/github/get/myproject/public-css-style_css
+http://example.com/github/get/myproject/public/.htaccess
 
