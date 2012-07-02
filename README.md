@@ -17,13 +17,13 @@ For highlighted and formatted code use a code hightlighter, check the list at th
 ## Usage
 
 ### Get a file from your repository
-In your controller:
+#### In your controller:
 $file_data = file_get_contents('http://example.com/github/get/myproject/index_php');
 $my_file = json_decode($file_data, true);
 
 return View::make('home.index')->with('my_file', $my_file);
 
-In your view:
+####In your view:
 {{ replace(base64_decode($my_file['content'])) }}
 
 ## Code highlighters
