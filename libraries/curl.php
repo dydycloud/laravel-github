@@ -23,6 +23,6 @@ class Curl
 	    $data = curl_exec($ch);
 	    curl_close($ch);
 
-	    return json_decode($data);		
+	    return $data;
 	}
 }
