@@ -92,4 +92,68 @@ class GitHub extends Curl
 		
 		return $repo_file;
 	}
+	
+	public function get_commits($repo)
+	{
+		//GET /repos/:user/:repo/commits
+		$commits_file = NULL;
+		
+		// if cache is enabled, get the cache file
+		if ($this->use_cache == TRUE)
+		{
+			$commits_file = $this->get_cache($repo, '_commits');
+		}
+	
+		if ($commits_file == NULL)
+		{
+			$url = 'repos/' . $this->git_username . '/' . $repo . '/commits';
+
+			$commits_file = $this->request($url);
+		}
+		
+		if ($this->use_cache == TRUE)
+		{
+			$this->put_cache($repo, '_commits', $commits_file);
+		}
+		
+		if (is_array($commits_file))
+		{
+			return json_encode($commits_file, true);
+		}
+		else {
+			return $commits_file;
+		}	
+	}
+	
+	public function get_repo($repo)
+	{
+		//GET /repos/:user/:repo
+		$repository = NULL;
+		
+		// if cache is enabled, get the cache file
+		if ($this->use_cache == TRUE)
+		{
+			$repository = $this->get_cache($repo, '_repo');
+		}
+	
+		if ($repository == NULL)
+		{
+			$url = 'repos/' . $this->git_username . '/' . $repo;
+
+			$repository = $this->request($url);
+		}
+		
+		if ($this->use_cache == TRUE)
+		{
+			$this->put_cache($repo, '_repo', $repository);
+		}
+		
+		if (is_array($repository))
+		{
+			return json_encode($repository, true);
+		}
+		else {
+			return $repository;
+		}
+	}
 }
