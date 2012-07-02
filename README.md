@@ -7,20 +7,24 @@ For highlighted and formatted code use a code hightlighter, check the list at th
 ## Currently Supported
 
 - get (Get file content)
+- repo (Get repository information)
+- commits (Get commits from a repository or file)
 
 ## Upcomming Support
 
-- repo (Get repository information)
-- commits (Get commits from a repository)
 - comments (Get comments from a repository)
 
 ## Usage
 
-http://example.com/github/get/myproject/index_php
+### Get a file from your repository
+In your controller:
+$file_data = file_get_contents('http://example.com/github/get/myproject/index_php');
+$my_file = json_decode($file_data, true);
 
-Or when a file is in a subfolder:
+return View::make('home.index')->with('my_file', $my_file);
 
-http://example.com/github/get/myproject/public/.htaccess
+In your view:
+{{ replace(base64_decode($my_file['content'])) }}
 
 ## Code highlighters
 
