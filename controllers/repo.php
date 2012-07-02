@@ -15,9 +15,9 @@ class Github_Repo_Controller extends Base_Controller
 	 */	
 	public function action_get($repo, $file)
 	{
-
 		$data = $this->git->get_file($repo, $file);
-		return str_replace(array('<?php', '?>'), array('&lt;?php', '?&gt;'), base64_decode($data->content));
+		
+		return $data;
 	}
 	
 	/*
@@ -27,6 +27,8 @@ class Github_Repo_Controller extends Base_Controller
 	 */
 	public function action_repo($repo)
 	{
+		$data = $this->git->get_repo($repo);
+		
 		return $data;
 	}
 	
@@ -37,6 +39,8 @@ class Github_Repo_Controller extends Base_Controller
 	 */
 	public function action_commits($repo)
 	{
+		$data = $this->git->get_commits($repo);
+		
 		return $data;
 	}
 	
