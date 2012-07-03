@@ -21,14 +21,15 @@ Returns file data in json format
 
 #### In your controller:
 ```
-$file_data = file_get_contents('http://example.com/github/get/myproject/index_php');<br/>
+$file_data = file_get_contents('http://example.com/github/get/myproject/index_php');
 $my_file = json_decode($file_data, true);
 
 return View::make('home.index')->with('my_file', $my_file);
 ```
 #### In your view:
+```
 {{ replace(base64_decode($my_file['content'])) }}
-
+```
 <a name="repo"></a>
 ### Get repository information
 
