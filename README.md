@@ -50,8 +50,12 @@ return View::make('home.index')->with('my_repo', $my_repo);
 ### Get commits from your repository or file
 
 #### In your controller:
-
+//Repository commits
 $commits_data = file_get_contents('http://example.com/github/commits/myproject'); <br>
+$my_commits = json_decode($commits_data, true);
+
+//File commits, add the sha key of the file u wish to retrieve
+$commits_data = file_get_contents('http://example.com/github/commits/myproject/6dcb09b5b57875f334f61aebed695e2e4193db5e'); <br>
 $my_commits = json_decode($commits_data, true);
 
 return View::make('home.index')->with('my_commits', $my_commits);
@@ -60,7 +64,7 @@ return View::make('home.index')->with('my_commits', $my_commits);
 
 {{ $my_commits['url'] }}
 
-##### Check section <> List commits on a repository at http://http://developer.github.com/v3/repos/commits/ for full response data.
+##### Check section <> List commits on a repository at http://developer.github.com/v3/repos/commits/ for full response data.
 
 ## Code highlighters
 
