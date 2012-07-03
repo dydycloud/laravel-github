@@ -37,9 +37,9 @@ class Github_Repo_Controller extends Base_Controller
 	 * @params repository
 	 * @returns array/json formatted commits 
 	 */
-	public function action_commits($repo)
+	public function action_commits($repo, $sha = NULL)
 	{
-		$data = $this->git->get_commits($repo);
+		$data = $this->git->get_commits($repo, $sha);
 		
 		return $data;
 	}

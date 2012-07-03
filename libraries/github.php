@@ -27,7 +27,7 @@ class GitHub extends Curl
 	 */
 	public function get_cache($repo, $file)
 	{
-		$cache = Cache::get($repo . '-' . $file);
+		$cache = Cache::get($repo . $file);
 
 		return $cache;
 	}
@@ -39,7 +39,7 @@ class GitHub extends Curl
 	 */
 	public function put_cache($repo, $file, $content)
 	{
-		Cache::put($repo . '-' . $file, $content, $this->cache_duration);
+		Cache::put($repo . $file, $content, $this->cache_duration);
 	}
 
 	/*
@@ -75,7 +75,7 @@ class GitHub extends Curl
 		// if cache is enabled, get the cache file
 		if ($this->use_cache == TRUE)
 		{
-			$repo_file = $this->get_cache($repo, $file);
+			$repo_file = $this->get_cache($repo, '_' . $file);
 		}
 	
 		if ($repo_file == NULL)
@@ -87,33 +87,40 @@ class GitHub extends Curl
 		
 		if ($this->use_cache == TRUE)
 		{
-			$this->put_cache($repo, $file, $repo_file);
+			$this->put_cache($repo, '_' . $file, $repo_file);
 		}
 		
 		return $repo_file;
 	}
 	
-	public function get_commits($repo)
+	public function get_commits($repo, $sha)
 	{
 		//GET /repos/:user/:repo/commits
 		$commits_file = NULL;
+		$cache_string = '';
+		$url_string = '';
 		
+		if($sha != NULL)
+		{
+			$cache_string = '_' . $sha;
+			$url_string = '/' . $sha;
+		}
 		// if cache is enabled, get the cache file
 		if ($this->use_cache == TRUE)
 		{
-			$commits_file = $this->get_cache($repo, '_commits');
+			$commits_file = $this->get_cache($repo, $cache_string);
 		}
 	
 		if ($commits_file == NULL)
 		{
-			$url = 'repos/' . $this->git_username . '/' . $repo . '/commits';
-
+			$url = 'repos/' . $this->git_username . '/' . $repo . '/commits' . $url_string;
+			//echo $url; exit;
 			$commits_file = $this->request($url);
 		}
 		
 		if ($this->use_cache == TRUE)
 		{
-			$this->put_cache($repo, '_commits', $commits_file);
+			$this->put_cache($repo, $cache_string, $commits_file);
 		}
 		
 		if (is_array($commits_file))
