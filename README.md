@@ -34,7 +34,12 @@ return View::make('home.index')->with('my_file', $my_file);
 ### Get repository information
 
 #### In your controller:
+```
+$repo_data = file_get_contents('http://example.com/github/repo/myproject');
+$my_repo = json_decode($file_data, true);
 
+return View::make('home.index')->with('my_repo', $my_repo);
+```
 #### In your view:
 
 <a name="commits"></a>
