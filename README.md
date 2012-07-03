@@ -41,9 +41,10 @@ $my_repo = json_decode($repo_data, true);
 return View::make('home.index')->with('my_repo', $my_repo);
 
 #### In your view:
-Check section <>GET at http://developer.github.com/v3/repos/ for full response data.
 
 {{ $my_repo['description'] }}
+
+##### Check section <>GET at http://developer.github.com/v3/repos/ for full response data.
 
 <a name="commits"></a>
 ### Get commits from your repository or file
