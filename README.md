@@ -20,11 +20,12 @@ Returns file data in json format
 ### Get a file from your repository
 
 #### In your controller:
+```
 $file_data = file_get_contents('http://example.com/github/get/myproject/index_php');<br/>
 $my_file = json_decode($file_data, true);
 
 return View::make('home.index')->with('my_file', $my_file);
-
+```
 #### In your view:
 {{ replace(base64_decode($my_file['content'])) }}
 
