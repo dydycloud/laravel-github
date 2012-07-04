@@ -17,7 +17,7 @@ For highlighted and formatted code use a code hightlighter, check the list at th
 ## Usage
 Returns file data in json format
 <a name="get"></a>
-### Get a file from your repository
+### <> Get a file from your repository
 
 #### In your controller:
 ~~~php
@@ -31,7 +31,7 @@ return View::make('home.index')->with('my_file', $my_file);
 {{ replace(base64_decode($my_file['content'])) }}
 ~~~
 <a name="repo"></a>
-### Get repository information
+### <> Get repository information
 
 #### In your controller:
 ~~~php
@@ -47,7 +47,7 @@ return View::make('home.index')->with('my_repo', $my_repo);
 ##### Check section <> GET at http://developer.github.com/v3/repos/ for full response data.
 
 <a name="commits"></a>
-### Get commits from your repository or file
+### <> Get commits from your repository or file
 
 #### In your controller:
 ~~~php
