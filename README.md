@@ -20,12 +20,12 @@ Returns file data in json format
 ### Get a file from your repository
 
 #### In your controller:
-```php
+~~~php
 $file_data = file_get_contents('http://example.com/github/get/myproject/index_php');
 $my_file = json_decode($file_data, true);
 
 return View::make('home.index')->with('my_file', $my_file);
-```
+~~~
 #### In your view:
 
 {{ replace(base64_decode($my_file['content'])) }}
@@ -34,22 +34,23 @@ return View::make('home.index')->with('my_file', $my_file);
 ### Get repository information
 
 #### In your controller:
-
+~~~php
 $repo_data = file_get_contents('http://example.com/github/repo/myproject'); <br>
 $my_repo = json_decode($repo_data, true);
 
 return View::make('home.index')->with('my_repo', $my_repo);
-
+~~~
 #### In your view:
-
+~~~php
 {{ $my_repo['description'] }}
-
+~~~
 ##### Check section <> GET at http://developer.github.com/v3/repos/ for full response data.
 
 <a name="commits"></a>
 ### Get commits from your repository or file
 
 #### In your controller:
+~~~php
 //Repository commits <br>
 $commits_data = file_get_contents('http://example.com/github/commits/myproject'); <br>
 $my_commits = json_decode($commits_data, true);
@@ -59,11 +60,11 @@ $commits_data = file_get_contents('http://example.com/github/commits/myproject/6
 $my_commits = json_decode($commits_data, true);
 
 return View::make('home.index')->with('my_commits', $my_commits);
-
+~~~
 #### In your view:
-
+~~~php
 {{ $my_commits['url'] }}
-
+~~~
 ##### Check section <> List commits on a repository at http://developer.github.com/v3/repos/commits/ for full response data.
 
 ## Code highlighters
