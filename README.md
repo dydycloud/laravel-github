@@ -35,7 +35,7 @@ return View::make('home.index')->with('my_file', $my_file);
 
 #### In your controller:
 ~~~php
-$repo_data = file_get_contents('http://example.com/github/repo/myproject'); <br>
+$repo_data = file_get_contents('http://example.com/github/repo/myproject');
 $my_repo = json_decode($repo_data, true);
 
 return View::make('home.index')->with('my_repo', $my_repo);
@@ -52,11 +52,11 @@ return View::make('home.index')->with('my_repo', $my_repo);
 #### In your controller:
 ~~~php
 //Repository commits <br>
-$commits_data = file_get_contents('http://example.com/github/commits/myproject'); <br>
+$commits_data = file_get_contents('http://example.com/github/commits/myproject');
 $my_commits = json_decode($commits_data, true);
 
 //File commits, add the sha key of the file u wish to retrieve <br>
-$commits_data = file_get_contents('http://example.com/github/commits/myproject/6dcb09b5b57875f334f61aebed695e2e4193db5e'); <br>
+$commits_data = file_get_contents('http://example.com/github/commits/myproject/6dcb09b5b57875f334f61aebed695e2e4193db5e');
 $my_commits = json_decode($commits_data, true);
 
 return View::make('home.index')->with('my_commits', $my_commits);
