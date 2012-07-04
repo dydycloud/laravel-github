@@ -27,9 +27,9 @@ $my_file = json_decode($file_data, true);
 return View::make('home.index')->with('my_file', $my_file);
 ~~~
 #### In your view:
-
+~~~php
 {{ replace(base64_decode($my_file['content'])) }}
-
+~~~
 <a name="repo"></a>
 ### Get repository information
 
