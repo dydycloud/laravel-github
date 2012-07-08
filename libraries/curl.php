@@ -11,16 +11,36 @@ class Curl
 	 * @param $url
 	 * @returns $data array
 	 */	
-	public function request($url)
+	public function request($url, $httpMethod = 'GET')
 	{
-		$url = $this->github . $url;
+
+		$curlOptions = array();
 		
+		if ('GET' === $httpMethod)
+		{
+        	$url = $this->github . $url;
+        } 
+        else 
+        {
+        	$curlOptions += array(
+            	CURLOPT_POST => true,
+                CURLOPT_POSTFIELDS => $queryString
+            );
+        }
+
+		$curlOptions += array(
+            CURLOPT_URL => $url,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_SSL_VERIFYPEER => false,
+        );
+				
 		$ch = curl_init($url);
-	    curl_setopt($ch, CURLOPT_HEADER, 0);
-	    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-	    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		
+		curl_setopt_array($ch, $curlOptions);
 		
 	    $data = curl_exec($ch);
+		
 	    curl_close($ch);
 
 	    return $data;
