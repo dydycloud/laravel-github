@@ -63,7 +63,17 @@ return View::make('home.index')->with('my_commits', $my_commits);
 ~~~
 #### In your view:
 ~~~php
-{{ $my_commits['url'] }}
+{{ 
+	//List the commit urls
+	foreach ($my_commits as $key) {
+		echo $my_commits['url'] . '<br/>';
+	}
+
+	//List of commit sha keys
+	foreach ($my_commits['commit'] as $key) {
+		echo $my_commits['sha'] . '<br/>';
+	}
+}}
 ~~~
 ##### Check section <> List commits on a repository at http://developer.github.com/v3/repos/commits/ for full response data.
 
